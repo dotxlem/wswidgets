@@ -110,26 +110,27 @@ export class LambdaIntegration extends AwsIntegration {
     }
 }
 
-export interface StepFunctionIntegrationProps extends IIntegrationProps {
+export interface StateMachineIntegrationProps extends IIntegrationProps {
     stateMachine: StateMachine;
     role: Role;
 }
 
 export class StateMachineIntegration extends AwsIntegration {
-    constructor (scope: Construct, id: string, props: StepFunctionIntegrationProps) {
+    constructor (scope: Construct, id: string, props: StateMachineIntegrationProps) {
         super(scope, id, {
             apiId: props.apiId,
             service: 'states',
             action: 'StartExecution',
             templateSelectionExpression: 'default',
             requestTemplates: {
-                'default': Lazy.stringValue({produce: () => `
-                #set($payload = $input.json('$.payload'))
-                {
-                    "input": "{\\\"connectionId\\\" : \\\"$context.connectionId\\\", \\\"payload\\" : \\\"$util.base64Encode($payload)\\\"}",
-                    "stateMachineArn": "${props.stateMachine.stateMachineArn}"
-                }
-                `})
+                'default':
+                    Lazy.stringValue({produce: () => `
+                    #set($payload = $input.json('$.payload'))
+                    {
+                        "input": "{\\\"connectionId\\\" : \\\"$context.connectionId\\\", \\\"payload\\" : \\\"$util.base64Encode($payload)\\\"}",
+                        "stateMachineArn": "${props.stateMachine.stateMachineArn}"
+                    }
+                    `})
             },
             role: props.role
         })
