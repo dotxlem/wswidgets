@@ -1,5 +1,6 @@
 {
-  "name": "@akkoro/wswidgets-responder",
+  "name": "@wswidgets/wswidgets-cdk-responder",
+  "private": true,
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {

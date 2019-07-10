@@ -1,5 +1,5 @@
 import * as crypto from 'crypto';
-import {Construct} from '@aws-cdk/core';
+import {Construct, Lazy, Stack} from '@aws-cdk/core';
 import {CfnDeploymentV2} from '@aws-cdk/aws-apigateway';
 import {WsApi} from './WsApi';
 
@@ -18,8 +18,8 @@ export class Deployment extends Construct {
             apiId: props.apiId
         });
 
-        this.deploymentId = this.resource.ref;
-        this.originalLogicalId = this.resource.logicalId;
+        this.deploymentId = Lazy.stringValue({ produce: () => this.resource.ref });
+        this.originalLogicalId = Stack.of(this).getLogicalId(this.resource);
     }
 
     public addToHash(data: any) {
