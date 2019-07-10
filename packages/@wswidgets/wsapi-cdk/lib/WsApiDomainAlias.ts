@@ -1,11 +1,11 @@
 import {Construct} from '@aws-cdk/core';
-import {Certificate} from '@aws-cdk/aws-certificatemanager';
+import {ICertificate} from '@aws-cdk/aws-certificatemanager';
 import {CfnBasePathMapping, CfnDomainNameV2} from '@aws-cdk/aws-apigateway';
 import {WsApi} from './WsApi';
 
 export interface ApiDomainAliasProps {
     domainName: string;
-    certificate: Certificate;
+    certificate: ICertificate;
 }
 
 export class WsApiDomainAlias extends Construct {

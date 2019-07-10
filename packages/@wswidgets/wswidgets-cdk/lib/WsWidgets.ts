@@ -1,9 +1,12 @@
 import {App, Stack, StackProps} from '@aws-cdk/core';
-import {WsApi} from '@wswidgets/wsapi-cdk';
+import {ICertificate} from '@aws-cdk/aws-certificatemanager';
+import {WsApi, WsApiDomainAlias} from '@wswidgets/wsapi-cdk';
 import {NanoService} from './NanoService';
 
 export interface WsWidgetsProps extends StackProps {
     apiName: string;
+    domainName?: string;
+    certificate?: ICertificate;
 }
 
 export class WsWidgets extends Stack {
@@ -16,7 +19,12 @@ export class WsWidgets extends Stack {
         super(scope, id, props);
 
         this.api = new WsApi(this, 'Api', {apiName: props.apiName});
-        // new WsApiDomainAlias(this.api, 'ApiDomainAlias', {subDomain: 'gateway'});
+        if (props.domainName && props.certificate) {
+            new WsApiDomainAlias(this.api, 'ApiDomainAlias', {
+                domainName: props.domainName,
+                certificate: props.certificate
+            });
+        }
 
         this.ingest = new NanoService(this, 'IngestSvc', {
             pathToCode: './lib/WsWidgets/lambda/ingest',

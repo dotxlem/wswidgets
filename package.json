@@ -1,8 +1,14 @@
 {
   "name": "wswidgets",
+  "private": true,
   "version": "1.0.0",
   "main": "index.js",
   "license": "ISC",
+  "workspaces": {
+    "packages": [
+      "packages/**"
+    ]
+  },
   "devDependencies": {
     "aws-cdk": "^0.39.0",
     "lerna": "^3.15.0",
