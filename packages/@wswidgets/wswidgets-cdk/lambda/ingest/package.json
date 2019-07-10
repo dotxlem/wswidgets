@@ -1,0 +1,15 @@
+{
+  "name": "@akkoro/wswidgets-ingest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "aws-lambda": "^0.1.2",
+    "aws-sdk": "^2.475.0",
+    "fluture": "^11.0.1",
+    "atob": "^2.1.2"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.27",
+    "@types/atob": "^2.1.2"
+  }
+}

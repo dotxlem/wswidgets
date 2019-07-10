@@ -1,0 +1,11 @@
+{
+  "name": "wswidgets",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "ISC",
+  "devDependencies": {
+    "aws-cdk": "^0.39.0",
+    "lerna": "^3.15.0",
+    "typescript": "^3.5.3"
+  }
+}
