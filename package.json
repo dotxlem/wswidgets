@@ -10,7 +10,8 @@
     ],
     "nohoist": [
       "**/@wswidgets/wswidgets-cdk-responder/**",
-      "**/@wswidgets/wswidgets-cdk-ingest/**"
+      "**/@wswidgets/wswidgets-cdk-ingest/**",
+      "**/@wswidgets/wsw-lambda/**"
     ]
   },
   "devDependencies": {
