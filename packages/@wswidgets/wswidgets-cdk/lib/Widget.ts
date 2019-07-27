@@ -62,19 +62,19 @@ export class Widget extends StateMachineFragment {
     }
 
     public get asIntegration () {
-        const role = new Role(this, 'IntegrationRole', {
-            assumedBy: new ServicePrincipal('apigateway.amazonaws.com')
-        });
-
-        const stmt = new PolicyStatement({
-            effect: Effect.ALLOW,
-            actions: ['states:*', 'lambda:*'],
-            resources: ['*']
-        });
-
-        role.addToPolicy(stmt);
-
         if (!this.smi) {
+            const role = new Role(this, 'IntegrationRole', {
+                assumedBy: new ServicePrincipal('apigateway.amazonaws.com')
+            });
+
+            const stmt = new PolicyStatement({
+                effect: Effect.ALLOW,
+                actions: ['states:*', 'lambda:*'],
+                resources: ['*']
+            });
+
+            role.addToPolicy(stmt);
+
             this.smi = new StateMachineIntegration(this, 'Integration', {
                 apiId: this.api.apiId,
                 stateMachine: this.asStateMachine,

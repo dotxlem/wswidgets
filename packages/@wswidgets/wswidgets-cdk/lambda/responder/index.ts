@@ -6,6 +6,7 @@ const cm = new ApiGatewayManagementApi({
 
 interface WsWidgetResponderEvent {
     connectionId: string;
+    messageId: string;
     status: string;
     response?: string;
 }
@@ -13,6 +14,6 @@ interface WsWidgetResponderEvent {
 export async function handler (event: WsWidgetResponderEvent) {
     await cm.postToConnection({
         ConnectionId: event.connectionId,
-        Data: Buffer.from(JSON.stringify({status: event.status}))
+        Data: Buffer.from(JSON.stringify({messageId: event.messageId, status: event.status}))
     }).promise();
 }

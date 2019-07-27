@@ -6,9 +6,7 @@
   "scripts": {
     "build": "tsc"
   },
-  "dependencies": {
-    "aws-lambda": "^0.1.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/aws-lambda": "^8.10.28"
   }

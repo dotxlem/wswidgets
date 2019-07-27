@@ -4,7 +4,7 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc && yarn install --force"
   },
   "dependencies": {
     "@aws-cdk/aws-iam": "^0.39.0",

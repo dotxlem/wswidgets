@@ -125,9 +125,10 @@ export class StateMachineIntegration extends AwsIntegration {
             requestTemplates: {
                 'default':
                     Lazy.stringValue({produce: () => `
+                    #set($msgId = $input.json('$.messageId'))
                     #set($payload = $input.json('$.payload'))
                     {
-                        "input": "{\\\"connectionId\\\" : \\\"$context.connectionId\\\", \\\"payload\\" : \\\"$util.base64Encode($payload)\\\"}",
+                        "input": "{\\\"connectionId\\\" : \\\"$context.connectionId\\\", \\\"messageId\\\" : \\\"$util.base64Encode($msgId)\\\", \\\"payload\\\" : \\\"$util.base64Encode($payload)\\\"}",
                         "stateMachineArn": "${props.stateMachine.stateMachineArn}"
                     }
                     `})
