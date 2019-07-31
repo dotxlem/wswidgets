@@ -8,12 +8,14 @@ interface WsWidgetResponderEvent {
     connectionId: string;
     messageId: string;
     status: string;
-    response?: string;
+    response?: object;
 }
 
 export async function handler (event: WsWidgetResponderEvent) {
+    const {messageId, status, response} = event;
+
     await cm.postToConnection({
         ConnectionId: event.connectionId,
-        Data: Buffer.from(JSON.stringify({messageId: event.messageId, status: event.status}))
+        Data: Buffer.from(JSON.stringify({messageId, status, response}))
     }).promise();
 }
